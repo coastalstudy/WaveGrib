@@ -1,9 +1,10 @@
 # Extract ocean wave data series offshore Vietnam 
 # from GRIB files (NOAA/ECMWF).
 
-import pygrib
+import os
 import sys
 import time
+import pygrib
 import datetime
 
 # Locations shown in the `map.png` file
@@ -19,6 +20,7 @@ locations = [(108.0, 21.0), (107.5, 20.5), (107.0, 20.5),
 			(106.0,  9.0), (105.5, 8.5), (104.5, 8.5), 
 			(104.5,  9.0), (104.5, 9.5), (104.5, 10.0)]
 
+DATA_DIR = '../downloads/'  # folder containing *.grib2 files
 
 def idxat(lon, lat):
 	''' Converting from `lon`, `lat` to indices 
@@ -67,7 +69,7 @@ def process(yrmo, nmo, outfile):
 		A text file created.
 	"""
 	st = time.time()
-	t = datetime.datetime(yrmo / 100, yrmo % 100, 1, 3, 0)
+	t = datetime.datetime(yrmo // 100, yrmo % 100, 1, 3, 0)
 	dt = datetime.timedelta(hours=3)
 	outfile.write("DateTime\t")
 	for _ in locations:
@@ -83,9 +85,9 @@ def process(yrmo, nmo, outfile):
 
 		print("Year Month :", num)
 		
-		with pygrib.open(fileHs) as grbsHs, \
-			pygrib.open(fileTp) as grbsTp, \
-			pygrib.open(fileDir) as grbsDir:
+		with pygrib.open(os.path.join(DATA_DIR, fileHs)) as grbsHs, \
+			pygrib.open(os.path.join(DATA_DIR, fileTp)) as grbsTp, \
+			pygrib.open(os.path.join(DATA_DIR, fileDir)) as grbsDir:
 			grbsHs.seek(1)
 			grbsTp.seek(1)
 			grbsDir.seek(1)

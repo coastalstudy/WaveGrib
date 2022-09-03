@@ -1,2 +1,10 @@
 # MAC OS X auto-generated files
 ._*
+
+# Data files and folders
+*.grib
+*.grib2
+/downloads/
+
+# Auxiliary files
+__pycache__/
