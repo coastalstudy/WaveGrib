@@ -34,6 +34,8 @@ $ python extract_wave_data_zone.py SCS 201102 1
 
 Note: the current directory must be `src`.
 
+![map of sampling points in the South China Sea](map_SCS.png)
+
 ## Speed
 
 Since GRIB files are prepared as "map layers", it is time-consuming to drill down these layers to extract the time series. As tested on Mac OS X (4 GB RAM, 1.4 GHz CPU): 
