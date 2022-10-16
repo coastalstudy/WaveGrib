@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
 import matplotlib.animation as animation
 
-from samples_SCS import sample_list
+from samples_UK import sample_list
 
 
 plt.figure(figsize=(4,6))
@@ -25,10 +25,10 @@ my_map.drawparallels(np.arange(48, 62, 2))
 
 # Code portion similar to `extract_wave_data_zone.py`
 RESOLUTION = 0.5  # deg.
-LON_MIN = 100
-LON_MAX = 121
-LAT_MIN = 1
-LAT_MAX = 25
+LON_MIN = -8 # 100
+LON_MAX = 8 # 121
+LAT_MIN = 48 # 1
+LAT_MAX = 62 # 25
 N_LON = int((LON_MAX - LON_MIN) / RESOLUTION) + 1
 N_LAT = int((LAT_MAX - LAT_MIN) / RESOLUTION) + 1
 
@@ -61,7 +61,10 @@ lat_of_code = dict(zip(ylabels, ylocs))
 for label in sample_list:
     lon = lon_of_code[label[0:2]]
     lat = lat_of_code[label[2:4]]
-    point = my_map.plot(lon, lat, 'go', markersize=1)
+    print(lon)
+    print(lat)
+    # https://jakevdp.github.io/PythonDataScienceHandbook/04.13-geographic-data-with-basemap.html#Example:-California-Cities
+    my_map.scatter(lon, lat, latlon=True, color='g', marker='D')
 
 # Annotate the long/lat axes
 # labels_lon = ['AA', 'AE', 'AI', 'AM', 'AQ', 'AU', 'AY', 'BC', 'BG', 'BK', 'BO']
@@ -72,6 +75,6 @@ for label in sample_list:
 # for lat, label in zip(range(2, 26, 2), labels_lat):
 #     plt.annotate(label, (100, lat), ha='right', va='center').set_zorder(10)
 
-
-plt.savefig('map_UK.png')
+plt.show()
+# plt.savefig('map_UK.png')
 
