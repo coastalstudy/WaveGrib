@@ -61,19 +61,17 @@ lat_of_code = dict(zip(ylabels, ylocs))
 for label in sample_list:
     lon = lon_of_code[label[0:2]]
     lat = lat_of_code[label[2:4]]
-    print(lon)
-    print(lat)
     # https://jakevdp.github.io/PythonDataScienceHandbook/04.13-geographic-data-with-basemap.html#Example:-California-Cities
-    my_map.scatter(lon, lat, latlon=True, color='g', marker='D')
+    my_map.scatter(lon, lat, latlon=True, color='g', marker='o')
 
 # Annotate the long/lat axes
-# labels_lon = ['AA', 'AE', 'AI', 'AM', 'AQ', 'AU', 'AY', 'BC', 'BG', 'BK', 'BO']
-# labels_lat = ['%02i' % i for i in range(3, 49, 4)]
-# for lon, label in zip(range(100, 122, 2), labels_lon):
-#     plt.annotate(label, (lon, 1), ha='center', va='top').set_zorder(10)
+labels_lon = ['AA', 'AE', 'AI', 'AM', 'AQ', 'AU', 'AY', 'BC', 'BG', 'BK', 'BO']
+labels_lat = ['%02i' % i for i in range(3, 49, 4)]
+for lon, label in zip(range(-8, 9, 2), labels_lon):
+    plt.annotate(label, my_map(lon, 48), ha='center', va='top').set_zorder(10)
 
-# for lat, label in zip(range(2, 26, 2), labels_lat):
-#     plt.annotate(label, (100, lat), ha='right', va='center').set_zorder(10)
+for lat, label in zip(range(48, 63, 2), labels_lat):
+    plt.annotate(label, my_map(-8, lat), ha='right', va='center').set_zorder(10)
 
 plt.show()
 # plt.savefig('map_UK.png')
